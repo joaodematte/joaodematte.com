@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .focusable {
+    @apply box-decoration-clone focus:decoration-transparent focus:outline-none focus:ring;
+  }
+}
