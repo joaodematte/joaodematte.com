@@ -20,8 +20,6 @@ type Song =
 export default function Spotify() {
   const { data } = useSWR<Song>('/api/now-playing', fetcher);
 
-  console.log({ data });
-
   return (
     <p className="flex items-center">
       <SpotifySVG />
