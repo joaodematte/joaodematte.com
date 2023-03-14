@@ -3,13 +3,14 @@ import NeomindSVG from '@/components/icons/NeomindSVG';
 import RapidsoftSVG from '@/components/icons/RapidsoftSVG';
 import UdescSVG from '@/components/icons/UdescSVG';
 import clsx from 'clsx';
+import { useI18n } from '@/context/i18n';
 
-const RESUME_DATA = [
+const getResumeData = (locale: string) => [
   {
     id: 0,
     title: 'Neomind',
-    description: 'Software Engineer',
-    time: '2022 - Current',
+    description: locale === 'en_US' ? 'Software Engineer' : 'Engenheiro de Software',
+    time: `2022 - ${locale === 'en_US' ? 'Current' : 'Atualmente'}`,
     icon: <NeomindSVG />,
     href: 'https://www.neomind.com.br',
     className: 'bg-rose-400/20 text-rose-400 hover:bg-rose-400/30 focus:ring-rose-400/40'
@@ -17,7 +18,7 @@ const RESUME_DATA = [
   {
     id: 1,
     title: 'Rapidsoft',
-    description: 'Software Engineer',
+    description: locale === 'en_US' ? 'Software Engineer' : 'Engenheiro de Software',
     time: '2022 - 2022',
     icon: <RapidsoftSVG />,
     href: 'https://www.rapidsoft.com.br',
@@ -25,16 +26,25 @@ const RESUME_DATA = [
   },
   {
     id: 2,
-    title: 'Santa Catarina State University (UDESC)',
-    description: 'Bachelor of Computer Science',
-    time: '2020 - Current',
+    title: 'UDESC',
+    description: locale === 'en_US' ? 'Bachelor of Computer Science' : 'Bacharelado em Ciência da Computação',
+    time: `2020 - ${locale === 'en_US' ? 'Current' : 'Atualmente'}`,
     icon: <UdescSVG />,
     href: 'https://www.udesc.br/cct',
     className: 'bg-lime-400/20 text-lime-400 hover:bg-lime-400/30 focus:ring-lime-400/40'
   }
 ];
 
-function Item({ title, description, time, icon, href, className }: Omit<typeof RESUME_DATA[number], 'id'>) {
+function Item({
+  title,
+  description,
+  time,
+  icon,
+  href,
+  className
+}: Omit<ReturnType<typeof getResumeData>[number], 'id'>) {
+  const { locale } = useI18n();
+
   return (
     <li className="flex items-center gap-4">
       <Link
@@ -63,10 +73,17 @@ function Item({ title, description, time, icon, href, className }: Omit<typeof R
 }
 
 export default function Resume() {
+  const {
+    locale,
+    translations: { resumeTitle, resumeDescription }
+  } = useI18n();
+
+  const RESUME_DATA = getResumeData(locale);
+
   return (
     <section id="resume">
-      <h2 className="text-2xl text-white font-bold">Résumé</h2>
-      <p className="mt-1">A history of places I’ve worked and studied at.</p>
+      <h2 className="text-2xl text-white font-bold">{resumeTitle}</h2>
+      <p className="mt-1">{resumeDescription}</p>
       <ul className="mt-8 list-none space-y-5">
         {RESUME_DATA.map(({ id, ...item }) => (
           <Item key={id} {...item} />

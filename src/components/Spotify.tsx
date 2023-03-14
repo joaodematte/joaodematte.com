@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import SpotifySVG from '@/components/icons/SpotifySVG';
 import fetcher from '@/utils/fetcher';
 import Link from 'next/link';
+import { useI18n } from '@/context/i18n';
 
 type Song =
   | {
@@ -18,6 +19,10 @@ type Song =
     };
 
 export default function Spotify() {
+  const {
+    translations: { spotify_not_playing }
+  } = useI18n();
+
   const { data } = useSWR<Song>('/api/now-playing', fetcher);
 
   return (
@@ -36,7 +41,7 @@ export default function Spotify() {
           <span className="text-zinc-400">— {data.artist}</span>
         </span>
       ) : (
-        <span className="ml-1">Not playing</span>
+        <span className="ml-1">{spotify_not_playing}</span>
       )}
     </p>
   );
