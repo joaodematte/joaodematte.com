@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import TRANSLATIONS from '@/utils/translations';
 
-type Locale = 'en_US' | 'pt_BR';
+export type Locale = 'en_US' | 'pt_BR';
 
 export interface i18nContext {
   locale: Locale;

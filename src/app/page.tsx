@@ -1,15 +1,38 @@
 'use client';
 
-import LocaleChanger from '@/components/LocaleChanger';
+import Settings from '@/components/Settings';
 import Resume from '@/components/sections/Resume';
 import Whoami from '@/components/sections/Whoami';
 import Spotify from '@/components/Spotify';
-import { I18nProvider } from '@/context/i18n';
+import { I18nProvider, Locale, useI18n } from '@/context/i18n';
+import { ThemeProvider, useTheme } from 'next-themes';
+import { useEffect, useRef, useState } from 'react';
 
-export default function Home() {
+function HomeContent() {
+  const { setTheme } = useTheme();
+  const { setLocale } = useI18n();
+
+  const [loaded, setLoaded] = useState<boolean>(false);
+
+  useEffect(() => {
+    const theme = localStorage.getItem('theme');
+    const locale = localStorage.getItem('locale');
+
+    if (theme) setTheme(theme);
+    if (locale) setLocale(locale as Locale);
+
+    setLoaded(true);
+
+    return () => {
+      setLoaded(false);
+    };
+  }, []);
+
+  if (!loaded) return null;
+
   return (
-    <I18nProvider>
-      <LocaleChanger />
+    <>
+      <Settings />
       <main className="w-full max-w-2xl mx-auto pt-24 pb-8 space-y-24">
         <Whoami />
         <Resume />
@@ -20,6 +43,16 @@ export default function Home() {
           <Spotify />
         </div>
       </footer>
-    </I18nProvider>
+    </>
+  );
+}
+
+export default function Home() {
+  return (
+    <ThemeProvider attribute="class">
+      <I18nProvider>
+        <HomeContent />
+      </I18nProvider>
+    </ThemeProvider>
   );
 }

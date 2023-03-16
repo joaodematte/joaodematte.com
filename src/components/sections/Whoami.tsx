@@ -55,8 +55,8 @@ export default function Whoami() {
         height={80}
         className="rounded-full"
       />
-      <h1 className="mt-5 text-2xl font-bold text-white">{name}</h1>
-      <p className="text-lg text-zinc-400 mt-1">{description}</p>
+      <h1 className="mt-5 text-2xl font-bold text-zinc-800 dark:text-white">{name}</h1>
+      <p className="text-lg text-zinc-600 dark:text-zinc-400 mt-1">{description}</p>
       <div className="mt-8 space-y-4 leading-loose">
         <p>{replacedHeading1}</p>
         <p>{replacedHeading2}</p>

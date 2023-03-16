@@ -50,7 +50,7 @@ const inter = Inter({ subsets: ['latin'] });
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={clsx('bg-zinc-900 text-zinc-300 px-4', inter.className)}>{children}</body>
+      <body className={clsx('bg-zinc-50 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-350 px-4', inter.className)}>{children}</body>
     </html>
   );
 }

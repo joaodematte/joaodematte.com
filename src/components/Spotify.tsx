@@ -41,7 +41,7 @@ export default function Spotify() {
           <span className="text-zinc-400">— {data.artist}</span>
         </span>
       ) : (
-        <span className="ml-1">{spotify_not_playing}</span>
+        <span className="ml-1 text-zinc-400">{spotify_not_playing}</span>
       )}
     </p>
   );

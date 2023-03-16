@@ -31,7 +31,7 @@ const getResumeData = (locale: string) => [
     time: `2020 - ${locale === 'en_US' ? 'Current' : 'Atualmente'}`,
     icon: <UdescSVG />,
     href: 'https://www.udesc.br/cct',
-    className: 'bg-lime-400/20 text-lime-400 hover:bg-lime-400/30 focus:ring-lime-400/40'
+    className: 'bg-green-400/20 text-green-400 hover:bg-green-400/30 focus:ring-green-400/40'
   }
 ];
 
@@ -66,7 +66,7 @@ function Item({
             {time}
           </time>
         </p>
-        <p className="mb-1 flex items-center text-zinc-400">{description}</p>
+        <p className="mb-1 flex items-center text-zinc-500 dark:text-zinc-400">{description}</p>
       </div>
     </li>
   );
@@ -75,14 +75,14 @@ function Item({
 export default function Resume() {
   const {
     locale,
-    translations: { resumeTitle, resumeDescription }
+    translations: { resume, resume_description: resumeDescription }
   } = useI18n();
 
   const RESUME_DATA = getResumeData(locale);
 
   return (
     <section id="resume">
-      <h2 className="text-2xl text-white font-bold">{resumeTitle}</h2>
+      <h2 className="text-2xl text-zinc-800 dark:text-white font-bold">{resume}</h2>
       <p className="mt-1">{resumeDescription}</p>
       <ul className="mt-8 list-none space-y-5">
         {RESUME_DATA.map(({ id, ...item }) => (
