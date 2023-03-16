@@ -28,7 +28,7 @@ export default function Whoami() {
       href="https://www.udesc.br/cct"
       target="_blank"
       rel="noreferrer"
-      className="focusable rounded-sm font-medium text-zinc-800 underline decoration-lime-500 decoration-2 underline-offset-2 transition duration-100 hover:text-lime-500 hover:decoration-lime-500/30 focus:text-lime-500 focus:ring-lime-500/40 dark:text-white dark:decoration-lime-400 dark:hover:text-lime-400 dark:hover:decoration-lime-400/30 dark:focus:text-lime-400 dark:focus:ring-lime-400/40"
+      className="focusable rounded-sm font-medium text-zinc-800 underline decoration-green-500 decoration-2 underline-offset-2 transition duration-100 hover:text-green-500 hover:decoration-green-500/30 focus:text-green-500 focus:ring-green-500/40 dark:text-white dark:decoration-green-400 dark:hover:text-green-400 dark:hover:decoration-green-400/30 dark:focus:text-green-400 dark:focus:ring-green-400/40"
     >
       UDESC
     </Link>
