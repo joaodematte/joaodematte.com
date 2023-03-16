@@ -28,14 +28,14 @@ export default function Settings() {
       <button
         type="button"
         onClick={handleChangeLocale}
-        className="focusable px-3 rounded-md bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 transition dark:hover:bg-zinc-800 py-2"
+        className="focusable px-3 rounded-md bg-zinc-50 hover:bg-zinc-200 dark:bg-zinc-900 transition dark:hover:bg-zinc-800 py-2"
       >
         {locale === 'en_US' ? '🇧🇷' : '🇺🇸'}
       </button>
       <button
         type="button"
         onClick={handleSetTheme}
-        className="focusable px-3 rounded-md bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-900 transition dark:hover:bg-zinc-800 py-2"
+        className="focusable px-3 rounded-md bg-zinc-50 hover:bg-zinc-200 dark:bg-zinc-900 transition dark:hover:bg-zinc-800 py-2"
       >
         {theme === 'dark' || theme === 'system' ? '🌕' : '🌑'}
       </button>
