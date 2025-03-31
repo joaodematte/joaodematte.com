@@ -1,9 +1,6 @@
 import Link from '@/components/link';
 import { getSpotifyData } from '@/lib/spotify';
 
-export const revalidate = 0;
-export const dynamic = 'force-dynamic';
-
 export default async function CurrentlyListening() {
   const data = await getSpotifyData();
 
