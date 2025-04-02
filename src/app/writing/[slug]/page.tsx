@@ -8,6 +8,7 @@ import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import remarkToc from 'remark-toc';
 
+import { sharedMetadata } from '@/app/shared-metadata';
 import Link from '@/components/link';
 import { getPost, getPosts } from '@/lib/posts';
 
@@ -30,9 +31,22 @@ export async function generateMetadata({ params }: WritingPageProps): Promise<Me
 
   if (!post) return {};
 
+  const description = post.content.split('\r\n').filter((str) => str.length > 0)[0];
+
   return {
     title: post.title,
-    keywords: post.keywords
+    description,
+    keywords: post.keywords,
+    openGraph: {
+      ...sharedMetadata.openGraph,
+      title: post.title,
+      description
+    },
+    twitter: {
+      ...sharedMetadata.twitter,
+      title: post.title,
+      description
+    }
   };
 }
 

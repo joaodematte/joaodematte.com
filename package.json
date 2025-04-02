@@ -3,18 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write ./src"
   },
   "dependencies": {
+    "babel-plugin-react-compiler": "^19.0.0-beta-e993439-20250328",
     "bright": "^1.0.0",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "motion": "^12.6.0",
-    "next": "15.2.4",
+    "next": "canary",
     "next-mdx-remote": "^5.0.0",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",

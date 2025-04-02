@@ -1,35 +1,12 @@
-import { Metadata } from 'next';
-
 import Link from '@/components/link';
 import { WritingList } from '@/components/writing-list';
-
-const title = 'joão dematte';
-const description = 'exploring human interactivity through UX';
-
-export const metadata: Metadata = {
-  title,
-  description,
-  twitter: {
-    site: '@joaodematte',
-    creator: '@joaodematte',
-    card: 'summary_large_image',
-    title,
-    description
-  },
-  openGraph: {
-    title,
-    description,
-    url: 'https://joaodematte.com/',
-    type: 'website'
-  }
-};
 
 export default function HomePage() {
   return (
     <>
       <section>
         <p className="font-semibold">joão dematte</p>
-        <p className="text-foreground">exploring human interactivity through UX.</p>
+        <p className="text-foreground">thoughts about react and programming languages.</p>
       </section>
 
       <section>

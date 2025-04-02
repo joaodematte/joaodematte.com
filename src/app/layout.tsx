@@ -7,6 +7,7 @@ import '@/styles/globals.css';
 
 import { Metadata } from 'next';
 
+import { sharedMetadata } from '@/app/shared-metadata';
 import CurrentlyListening from '@/components/currently-listening';
 import { cn } from '@/lib/cn';
 
@@ -21,29 +22,7 @@ const ibmPlexMono = JetBrains_Mono({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800']
 });
 
-const title = 'joão dematte';
-const description = 'exploring human interactivity through UX';
-
-export const metadata: Metadata = {
-  title: {
-    template: `%s — ${title}`,
-    default: title
-  },
-  description,
-  twitter: {
-    site: '@joaodematte',
-    creator: '@joaodematte',
-    card: 'summary_large_image',
-    title,
-    description
-  },
-  openGraph: {
-    title,
-    description,
-    url: 'https://joaodematte.com/',
-    type: 'website'
-  }
-};
+export const metadata: Metadata = sharedMetadata;
 
 export default function RootLayout({
   children
