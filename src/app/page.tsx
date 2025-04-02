@@ -3,8 +3,6 @@ import { Metadata } from 'next';
 import Link from '@/components/link';
 import { WritingList } from '@/components/writing-list';
 
-export const dynamic = 'force-dynamic';
-
 const title = 'joão dematte';
 const description = 'exploring human interactivity through UX';
 
