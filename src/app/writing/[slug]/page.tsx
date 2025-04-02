@@ -9,10 +9,18 @@ import remarkGfm from 'remark-gfm';
 import remarkToc from 'remark-toc';
 
 import Link from '@/components/link';
-import { getPost } from '@/lib/posts';
+import { getPost, getPosts } from '@/lib/posts';
 
 interface WritingPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const posts = await getPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug
+  }));
 }
 
 export async function generateMetadata({ params }: WritingPageProps): Promise<Metadata> {
