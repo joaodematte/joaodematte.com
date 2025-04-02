@@ -1,12 +1,4 @@
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
-
-const basic = btoa(`${client_id}:${client_secret}`);
-const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
-const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
-
-interface SpotifyAPIResponse {
+export interface SpotifyAPIResponse {
   is_playing: boolean;
   item: {
     album: {
@@ -65,13 +57,30 @@ interface SpotifyAPIResponse {
   };
 }
 
-function normalizeResponse(data: SpotifyAPIResponse) {
-  const isPlaying = data.is_playing;
-  const title = data.item.name;
-  const artist = data.item.artists.map((_artist: Record<string, unknown>) => _artist.name).join(', ');
-  const album = data.item.album.name;
-  const albumImageUrl = data.item.album.images[0].url;
-  const songUrl = data.item.external_urls.spotify;
+export interface CurrentlyListeningSong {
+  artist: string;
+  isPlaying: boolean;
+  songUrl: string;
+  title: string;
+  albumImageUrl: string;
+  album: string;
+}
+
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
+
+const basic = btoa(`${client_id}:${client_secret}`);
+const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
+const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
+
+export function normalizeSpotifyResponse(responseData: SpotifyAPIResponse): CurrentlyListeningSong {
+  const isPlaying = responseData.is_playing;
+  const title = responseData.item.name;
+  const artist = responseData.item.artists.map((_artist: Record<string, unknown>) => _artist.name).join(', ');
+  const album = responseData.item.album.name;
+  const albumImageUrl = responseData.item.album.images[0].url;
+  const songUrl = responseData.item.external_urls.spotify;
 
   return {
     album,
@@ -99,20 +108,12 @@ async function getAccessToken() {
   return response.json();
 }
 
-export async function getSpotifyData(): Promise<ReturnType<typeof normalizeResponse> | { isPlaying: false }> {
+export async function getNowPlaying() {
   const { access_token } = await getAccessToken();
 
-  const response = await fetch(NOW_PLAYING_ENDPOINT, {
+  return fetch(NOW_PLAYING_ENDPOINT, {
     headers: {
       Authorization: `Bearer ${access_token}`
     }
   });
-
-  if (response.status === 204 || response.status > 400) return { isPlaying: false };
-
-  const song = await response.json();
-
-  if (song.item === null) return { isPlaying: false };
-
-  return normalizeResponse(song);
 }

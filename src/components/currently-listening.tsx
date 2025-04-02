@@ -1,10 +1,22 @@
+'use client';
+
+import useSWR from 'swr';
+
 import Link from '@/components/link';
-import { getSpotifyData } from '@/lib/spotify';
+import fetcher from '@/lib/fetcher';
+import { CurrentlyListeningSong } from '@/lib/spotify';
 
-export default async function CurrentlyListening() {
-  const data = await getSpotifyData();
+export default function CurrentlyListening() {
+  const { data } = useSWR<CurrentlyListeningSong>('/api/currently-listening', fetcher, {
+    revalidateIfStale: true,
+    revalidateOnFocus: true,
+    revalidateOnMount: true,
+    revalidateOnReconnect: true
+  });
 
-  if (!data.isPlaying) return null;
+  if (!data) {
+    return null;
+  }
 
   return (
     <section className="invisible fixed bottom-12 left-12 z-20 2xl:visible">
