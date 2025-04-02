@@ -60,7 +60,7 @@ export default function HomePage() {
             </Link>
           </li>
           <li>
-            <Link href="https://linkedin.com/joaodematte" target="_blank" external>
+            <Link href="https://linkedin.com/in/dematte" target="_blank" external>
               linkedin
             </Link>
           </li>
