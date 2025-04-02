@@ -31,21 +31,19 @@ export async function generateMetadata({ params }: WritingPageProps): Promise<Me
 
   if (!post) return {};
 
-  const description = post.content.split('\r\n').filter((str) => str.length > 0)[0];
-
   return {
     title: post.title,
-    description,
-    keywords: post.keywords,
+    description: post['meta:description'],
+    keywords: post['meta:keywords'],
     openGraph: {
       ...sharedMetadata.openGraph,
       title: post.title,
-      description
+      description: post['meta:description']
     },
     twitter: {
       ...sharedMetadata.twitter,
       title: post.title,
-      description
+      description: post['meta:description']
     }
   };
 }

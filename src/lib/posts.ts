@@ -4,12 +4,13 @@ import matter from 'gray-matter';
 import { cache } from 'react';
 
 interface Post {
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  keywords: string;
-  content: string;
+  'slug': string;
+  'title': string;
+  'description': string;
+  'date': string;
+  'content': string;
+  'meta:description': string;
+  'meta:keywords': string;
 }
 
 export const getPosts = cache(async () => {
