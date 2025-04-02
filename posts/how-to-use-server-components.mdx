@@ -1,0 +1,79 @@
+---
+slug: 'how-to-use-react-server-components'
+title: 'How to use React Server Components (RSCs)'
+description: 'and how this website uses it'
+date: '2025-04-01T00:00:00-03:00'
+keywords: 'react server components, RSC, react, server rendering, web performance, caching, Suspense, developer experience, vanilla react, API endpoints, loading spinners, Next.js, Remix, getPosts, getPost'
+---
+
+Contrary to what the React team has been evangelizing for years, the latest version fully supports server components (called RSCs), which are React components rendered on the server and streamed to the client. They aren’t as flexible as client components because they can’t use hooks and contexts to create fully interactive elements on the screen, but they’re great if your goal is to eliminate loading spinners from your application.
+
+This blog is built entirely using RSCs, and I’m pretty happy with it.
+
+The developer experience is fantastic, and it’s super fast for building applications since you don't need to create hundreds of API calls and endpoints.
+
+The only client components on this website are the `<CurrentlyListening />` (displayed in the bottom-left when I’m listening to something), the writing list, and the post itself. You might say that I could have achieved the same result using Next.js or Remix before, but now I can just use vanilla React (I know the implementation of RSCs is provided by frameworks, but you get my point).
+
+This is my `<WritingList />` component—it's deadly simple. I'm just awaiting the content of `getPosts` and rendering it as a list.
+
+```tsx
+import fs from 'fs/promises';
+import { cache } from 'react';
+
+export const getPosts = cache(async () => {
+  const posts = await fs.readdir('./posts/');
+
+  return Promise.all(/* ... */);
+});
+
+export async function WritingList() {
+  const posts = await getPosts();
+
+  return (
+   // ...
+  );
+}
+```
+
+You may find the cache function very interesting. It’s a new function provided by React that is only available for use with server components, and it caches the result of a fetch or computation so that it always returns the same result unless the parameters change.
+
+Pretty useful, huh?
+
+Now it starts to get interesting.
+
+```tsx
+import fs from 'fs/promises';
+import { cache } from 'react';
+
+export const getPosts = cache(async () => {
+  const posts = await fs.readdir('./posts/');
+
+  return Promise.all(/* ... */);
+});
+
+export async function getPost(slug: string) {
+  const posts = await getPosts();
+
+  return posts.find((post) => post.slug === slug);
+}
+
+export default async function WritingPage({ params }: WritingPageProps) {
+  const { slug } = await params;
+
+  const post = await getPost(slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  return (
+    // ...
+  );
+}
+```
+
+This is basically the same code as in `<WritingList>`, but I’m redirecting the user if nothing is found, which grants type-safety.
+
+Remember the cache function? It allows me to call getPosts inside getPost without having to read from disk again—just cached data.
+
+People on Twitter are complaining that RSCs make the website slower, but that isn’t true at all. The correct way to use RSCs is by wrapping them in a `<Suspense />` (or by using the `loading.tsx` file in Next.js), so they don't block page rendering and you can get faster results when navigating through your app.

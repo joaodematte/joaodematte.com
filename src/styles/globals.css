@@ -1,15 +1,14 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
   --color-foreground: var(--color-foreground);
   --color-foreground-accent: var(--color-foreground-accent);
   --color-background: var(--color-background);
-
-  --animate-fade: fade 1s ease both;
-  --animate-grain-fade: grainFade 1450ms ease forwards;
 }
 
 @layer base {
@@ -27,39 +26,10 @@
   }
 
   body {
-    @apply bg-background text-foreground relative h-dvh w-full font-serif tracking-tight antialiased;
+    @apply bg-background text-foreground relative h-dvh w-full font-serif leading-tight tracking-tight antialiased;
   }
 
   ::selection {
     @apply bg-foreground text-background;
-  }
-
-  @keyframes fade {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes grainFade {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 0.05;
-    }
-  }
-
-  @keyframes play {
-    0% {
-      transform: scaleY(0.2);
-    }
-    100% {
-      transform: scaleY(1);
-    }
   }
 }

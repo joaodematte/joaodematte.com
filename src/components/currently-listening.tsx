@@ -7,25 +7,10 @@ export default async function CurrentlyListening() {
   if (!data.isPlaying) return null;
 
   return (
-    <section>
-      <p
-        className="animate-fade font-semibold"
-        style={{
-          animationDelay: 'calc(var(--animation-delay-step) * 11)'
-        }}
-      >
-        currently listening to
-      </p>
+    <section className="invisible fixed bottom-12 left-12 z-20 2xl:visible">
+      <p className="font-semibold">currently listening to</p>
       <p>
-        <Link
-          href={data.songUrl}
-          target="_blank"
-          external
-          className="animate-fade"
-          style={{
-            animationDelay: 'calc(var(--animation-delay-step) * 12)'
-          }}
-        >
+        <Link href={data.songUrl} target="_blank" external>
           {data.artist} - {data.title}
         </Link>
       </p>

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
-import CurrentlyListening from '@/components/currently-listening';
 import Link from '@/components/link';
+import { WritingList } from '@/components/writing-list';
 
 export const dynamic = 'force-dynamic';
 
@@ -28,41 +28,15 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <main className="w-full max-w-xl space-y-6 p-6 leading-tight md:p-12">
+    <>
       <section>
-        <p
-          className="animate-fade font-semibold"
-          style={{
-            animationDelay: 'calc(var(--animation-delay-step) * 1)'
-          }}
-        >
-          joão dematte
-        </p>
-        <p
-          className="text-foreground animate-fade"
-          style={{
-            animationDelay: 'calc(var(--animation-delay-step) * 2)'
-          }}
-        >
-          exploring human interactivity through UX.
-        </p>
+        <p className="font-semibold">joão dematte</p>
+        <p className="text-foreground">exploring human interactivity through UX.</p>
       </section>
 
       <section>
-        <p
-          className="animate-fade font-semibold"
-          style={{
-            animationDelay: 'calc(var(--animation-delay-step) * 3)'
-          }}
-        >
-          today
-        </p>
-        <p
-          className="text-foreground animate-fade"
-          style={{
-            animationDelay: 'calc(var(--animation-delay-step) * 4)'
-          }}
-        >
+        <p className="font-semibold">today</p>
+        <p className="text-foreground">
           working as a mid-level software engineer at{' '}
           <Link href="https://neomind.com.br" target="_blank" external>
             neomind
@@ -70,12 +44,7 @@ export default function HomePage() {
           , currently building a drag and drop form builder and layout designer. passionate about gym and programming
           languages;
         </p>
-        <p
-          className="text-foreground animate-fade"
-          style={{
-            animationDelay: 'calc(var(--animation-delay-step) * 5)'
-          }}
-        >
+        <p className="text-foreground">
           and improving the React&apos;s ecosystem by scratching a new drag and drop open-source library called{' '}
           <Link href="https://github.com/joaodematte/grippy" target="_blank" external>
             grippy
@@ -85,71 +54,32 @@ export default function HomePage() {
       </section>
 
       <section>
-        <p
-          className="animate-fade font-semibold"
-          style={{
-            animationDelay: 'calc(var(--animation-delay-step) * 6)'
-          }}
-        >
-          links
-        </p>
+        <p className="font-semibold">links</p>
         <ul>
           <li>
-            <Link
-              href="https://twitter.com/joaodematte"
-              target="_blank"
-              external
-              className="animate-fade"
-              style={{
-                animationDelay: 'calc(var(--animation-delay-step) * 7)'
-              }}
-            >
+            <Link href="https://twitter.com/joaodematte" target="_blank" external>
               twitter
             </Link>
           </li>
           <li>
-            <Link
-              href="https://linkedin.com/joaodematte"
-              target="_blank"
-              external
-              className="animate-fade"
-              style={{
-                animationDelay: 'calc(var(--animation-delay-step) * 8)'
-              }}
-            >
+            <Link href="https://linkedin.com/joaodematte" target="_blank" external>
               linkedin
             </Link>
           </li>
           <li>
-            <Link
-              href="https://github.com/joaodematte"
-              target="_blank"
-              external
-              className="animate-fade"
-              style={{
-                animationDelay: 'calc(var(--animation-delay-step) * 9)'
-              }}
-            >
+            <Link href="https://github.com/joaodematte" target="_blank" external>
               github
             </Link>
           </li>
           <li>
-            <Link
-              href="https://www.youtube.com/@joaodematte"
-              target="_blank"
-              external
-              className="animate-fade"
-              style={{
-                animationDelay: 'calc(var(--animation-delay-step) * 10)'
-              }}
-            >
+            <Link href="https://www.youtube.com/@joaodematte" target="_blank" external>
               youtube
             </Link>
           </li>
         </ul>
       </section>
 
-      <CurrentlyListening />
-    </main>
+      <WritingList />
+    </>
   );
 }
