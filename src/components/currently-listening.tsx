@@ -14,7 +14,7 @@ export default function CurrentlyListening() {
     revalidateOnReconnect: true
   });
 
-  if (!data) {
+  if (!data || !data.isPlaying) {
     return null;
   }
 
