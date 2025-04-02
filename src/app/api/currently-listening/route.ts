@@ -4,7 +4,7 @@ import { getNowPlaying, normalizeSpotifyResponse } from '@/lib/spotify';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 30;
 
 export async function GET() {
   const response = await getNowPlaying();
