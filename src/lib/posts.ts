@@ -1,5 +1,5 @@
 import fs from 'fs/promises';
-import path from 'path';
+import path, { join } from 'path';
 import matter from 'gray-matter';
 import { cache } from 'react';
 
@@ -14,14 +14,14 @@ interface Post {
 }
 
 export const getPosts = cache(async () => {
-  const posts = await fs.readdir('./posts/');
+  const postsPath = join(process.cwd(), 'posts');
+  const posts = await fs.readdir(postsPath);
 
   return Promise.all(
     posts
       .filter((file) => path.extname(file) === '.mdx')
       .map(async (file) => {
-        const path = `./posts/${file}`;
-        const postContent = await fs.readFile(path, 'utf-8');
+        const postContent = await fs.readFile(join(postsPath, file), 'utf-8');
         const { data, content } = matter(postContent);
 
         return { ...data, content } as Post;
