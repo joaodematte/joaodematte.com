@@ -1,6 +1,6 @@
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
+
+import { loadFonts } from '@/lib/load-fonts';
 
 export const alt = 'joão dematte';
 export const size = {
@@ -11,8 +11,7 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image() {
-  const lora = await readFile(join(process.cwd(), 'public/Lora-Regular.ttf'));
-  const loraBold = await readFile(join(process.cwd(), 'public/Lora-Bold.ttf'));
+  const { loraRegular, loraBold } = await loadFonts();
 
   return new ImageResponse(
     (
@@ -68,7 +67,7 @@ export default async function Image() {
       fonts: [
         {
           name: 'Lora',
-          data: lora,
+          data: loraRegular,
           style: 'normal',
           weight: 400
         },
