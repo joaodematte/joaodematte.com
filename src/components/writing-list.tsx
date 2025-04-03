@@ -15,7 +15,11 @@ export async function WritingList() {
             </Link>
             {' — '}
             <span>
-              {new Date(date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
+              {new Date(Number(date) * 1000).toLocaleDateString('en-US', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+              })}
             </span>
           </li>
         ))}

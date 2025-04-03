@@ -2,7 +2,7 @@
 slug: 'how-to-use-react-server-components'
 title: 'How to use React Server Components (RSCs)'
 description: 'and how this website uses it'
-date: '2025-04-01T00:00:00-03:00'
+date: '1743713337'
 meta:description: 'Contrary to what the React team has been evangelizing for years, the latest version fully supports server components (called RSCs), which are React components rendered on the server and streamed to the client.'
 meta:keywords: 'react server components, RSC, react, server rendering, web performance, caching, Suspense, developer experience, vanilla react, API endpoints, loading spinners, Next.js, Remix, getPosts, getPost'
 ---
@@ -19,12 +19,34 @@ This is my `<WritingList />` component—it's deadly simple. I'm just awaiting t
 
 ```tsx
 import fs from 'fs/promises';
+import path, { join } from 'path';
+import matter from 'gray-matter';
 import { cache } from 'react';
 
-export const getPosts = cache(async () => {
-  const posts = await fs.readdir('./posts/');
+interface Post {
+  'slug': string;
+  'title': string;
+  'description': string;
+  'date': string;
+  'content': string;
+  'meta:description': string;
+  'meta:keywords': string;
+}
 
-  return Promise.all(/* ... */);
+export const getPosts = cache(async () => {
+  const postsPath = join(process.cwd(), 'posts');
+  const posts = await fs.readdir(postsPath);
+
+  return Promise.all(
+    posts
+      .filter((file) => path.extname(file) === '.mdx')
+      .map(async (file) => {
+        const postContent = await fs.readFile(join(postsPath, file), 'utf-8');
+        const { data, content } = matter(postContent);
+
+        return { ...data, content } as Post;
+      })
+  );
 });
 
 export async function WritingList() {
@@ -44,12 +66,38 @@ Now it starts to get interesting.
 
 ```tsx
 import fs from 'fs/promises';
+import path, { join } from 'path';
+import matter from 'gray-matter';
 import { cache } from 'react';
 
-export const getPosts = cache(async () => {
-  const posts = await fs.readdir('./posts/');
+interface Post {
+  'slug': string;
+  'title': string;
+  'description': string;
+  'date': string;
+  'content': string;
+  'meta:description': string;
+  'meta:keywords': string;
+}
 
-  return Promise.all(/* ... */);
+interface WritingPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export const getPosts = cache(async () => {
+  const postsPath = join(process.cwd(), 'posts');
+  const posts = await fs.readdir(postsPath);
+
+  return Promise.all(
+    posts
+      .filter((file) => path.extname(file) === '.mdx')
+      .map(async (file) => {
+        const postContent = await fs.readFile(join(postsPath, file), 'utf-8');
+        const { data, content } = matter(postContent);
+
+        return { ...data, content } as Post;
+      })
+  );
 });
 
 export async function getPost(slug: string) {

@@ -90,7 +90,11 @@ export default async function WritingPage({ params }: WritingPageProps) {
       <h1 className="font-extrabold">{post.title}</h1>
       <p className="text-foreground">
         {post.description} —{' '}
-        {new Date(post.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
+        {new Date(Number(post.date) * 1000).toLocaleDateString('en-US', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        })}
       </p>
 
       <div className="prose prose-code:font-mono prose-zinc prose-code:after:hidden prose-code:px-1 prose-code:before:hidden dark:prose-invert text-foreground prose-code:bg-[#1e1e1e] prose-code:rounded-sm prose-code:text-[#D4D4D4] mt-6">
