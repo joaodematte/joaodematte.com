@@ -22,7 +22,7 @@ export default function CurrentlyListening() {
     <section className="invisible fixed bottom-12 left-12 z-20 2xl:visible">
       <p className="font-semibold">currently listening to</p>
       <p>
-        <Link href={data.songUrl} target="_blank" external>
+        <Link href={data.songUri} external>
           {data.artist} - {data.title}
         </Link>
       </p>

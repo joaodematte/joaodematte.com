@@ -61,6 +61,7 @@ export interface CurrentlyListeningSong {
   artist: string;
   isPlaying: boolean;
   songUrl: string;
+  songUri: string;
   title: string;
   albumImageUrl: string;
   album: string;
@@ -81,6 +82,7 @@ export function normalizeSpotifyResponse(responseData: SpotifyAPIResponse): Curr
   const album = responseData.item.album.name;
   const albumImageUrl = responseData.item.album.images[0].url;
   const songUrl = responseData.item.external_urls.spotify;
+  const songUri = responseData.item.uri;
 
   return {
     album,
@@ -88,7 +90,8 @@ export function normalizeSpotifyResponse(responseData: SpotifyAPIResponse): Curr
     artist,
     isPlaying,
     songUrl,
-    title
+    title,
+    songUri
   };
 }
 

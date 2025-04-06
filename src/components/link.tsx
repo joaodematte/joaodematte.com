@@ -1,5 +1,7 @@
 import NextLink from 'next/link';
 
+import { cn } from '@/lib/cn';
+
 interface LinkProps extends React.ComponentProps<typeof NextLink> {
   external?: boolean;
 }
@@ -18,9 +20,11 @@ function ExternalIcon(props: React.ComponentProps<'svg'>) {
 }
 
 export default function Link({ children, className = '', external = false, ...props }: LinkProps) {
+  const classes = cn('hover:bg-foreground hover:text-background underline', className);
+
   if (external) {
     return (
-      <NextLink className={`hover:bg-foreground-accent hover:text-background underline ${className}`} {...props}>
+      <NextLink className={classes} {...props}>
         {children}
         <span>
           &nbsp;
@@ -31,7 +35,7 @@ export default function Link({ children, className = '', external = false, ...pr
   }
 
   return (
-    <NextLink className={`hover:bg-foreground-accent hover:text-background underline ${className}`} {...props}>
+    <NextLink className={classes} {...props}>
       {children}
     </NextLink>
   );

@@ -75,10 +75,10 @@ export default async function WritingPage({ params }: WritingPageProps) {
 
   return (
     <article className="relative">
-      <nav className="absolute -inset-x-24 select-none">
+      <nav className="w-full select-none lg:absolute lg:-inset-x-24">
         <NextLink
           href="/"
-          className="text-foreground group absolute inline-flex transform-gpu items-center gap-1.5 opacity-50 transition-transform duration-100 hover:-translate-x-2"
+          className="text-foreground group mb-[1ch] inline-flex transform-gpu items-center gap-1.5 opacity-50 transition-transform duration-100 hover:-translate-x-2 lg:absolute lg:mb-0"
         >
           <GoBackIcon />
           <span className="font-mono text-sm opacity-0 transition-opacity duration-100 group-hover:opacity-100">

@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import { JetBrains_Mono, Lora } from 'next/font/google';
 
 import { Providers } from '@/app/providers';
@@ -16,7 +17,7 @@ const lora = Lora({
   subsets: ['latin']
 });
 
-const ibmPlexMono = JetBrains_Mono({
+const jetBrainsMono = JetBrains_Mono({
   variable: '--font-mono',
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800']
@@ -31,12 +32,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(lora.variable, ibmPlexMono.variable)}>
-        <CurrentlyListening />
-        <Grain />
+      <body className={cn(lora.variable, jetBrainsMono.variable)}>
         <Providers>
           <main className="mx-auto w-full max-w-3xl space-y-6 p-6 md:py-24">{children}</main>
         </Providers>
+
+        <CurrentlyListening />
+        <Grain />
+        <Analytics />
       </body>
     </html>
   );

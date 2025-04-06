@@ -25,7 +25,7 @@ export function Grain({ className, ...props }: React.ComponentProps<'div'>) {
     <div className={`pointer-events-none fixed inset-0 z-40 h-full w-full overflow-hidden ${className}`} {...props}>
       <div
         ref={setGrainRef}
-        className="absolute inset-[-200%] h-[400%] w-[400%] bg-[url('/noise.png')] bg-[length:256px] bg-left-top opacity-5"
+        className="absolute inset-[-200%] h-[400%] w-[400%] bg-[url('/noise.png')] bg-[length:256px] bg-left-top opacity-[4%]"
       />
     </div>
   );
