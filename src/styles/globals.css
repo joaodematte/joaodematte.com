@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
@@ -31,5 +31,37 @@
 
   ::selection {
     @apply bg-foreground text-background;
+  }
+
+  @keyframes slide-out {
+    0% {
+      transform: translateX(0rem);
+    }
+
+    100% {
+      transform: translateX(-1rem);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slide-in {
+    0% {
+      transform: translateX(1rem);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateX(0rem);
+      opacity: 1;
+    }
+  }
+
+  ::view-transition-old(page) {
+    animation: slide-out 300ms ease-out both;
+  }
+
+  ::view-transition-new(page) {
+    animation: slide-in 300ms ease-out both;
+    animation-delay: 300ms;
   }
 }
