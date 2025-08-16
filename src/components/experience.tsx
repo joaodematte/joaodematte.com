@@ -40,7 +40,7 @@ function AccordionItem({
         </p>
         <p className="ml-auto hidden sm:block">{time}</p>
       </AccordionTrigger>
-      <AccordionContent className="group-data-[state=open]/content:bg-brand px-4 py-2 pt-0 group-data-[state=open]/content:text-white">
+      <AccordionContent className="group-data-[state=open]/content:bg-brand p-4 pt-0 group-data-[state=open]/content:text-white">
         {description}
       </AccordionContent>
     </AccordionItemBase>
