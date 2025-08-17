@@ -10,7 +10,7 @@ export function Section({ className, content, title, ...props }: SectionProps) {
   return (
     <section
       className={cn(
-        'border-foreground divide-foreground grid divide-x border-b md:grid-cols-[128px_640px_1fr]',
+        'border-foreground divide-foreground grid divide-x border-b first:border-t md:grid-cols-[128px_640px_1fr]',
         className
       )}
       {...props}

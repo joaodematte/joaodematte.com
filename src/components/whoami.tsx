@@ -5,7 +5,9 @@ export function Whoami() {
     <Section
       content={
         <div className="bg-background p-4 pt-12">
-          <h1 className="text-xl font-bold">João Dematte</h1>
+          <h1 className="text-2xl leading-normal font-semibold">
+            João Dematte
+          </h1>
           <p className="text-sm">
             Self-taught interaction engineer obsessed with details and
             interfaces.

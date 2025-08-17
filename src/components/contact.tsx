@@ -33,16 +33,14 @@ type ContactItem = (typeof CONTACT_ITEMS)[number];
 
 function ContactItem({ label, value, href }: ContactItem) {
   return (
-    <div className="border-foreground grid grid-cols-[100px_auto] border-b border-dotted px-4 py-2 last:border-b-0">
+    <a
+      href={href}
+      target="_blank"
+      className="border-foreground hover:text-background hover:bg-brand grid cursor-alias grid-cols-[100px_auto] border-b border-dotted px-4 py-2 last:border-b-0"
+    >
       <span className="font-semibold">{label}</span>
-      <a
-        href={href}
-        target="_blank"
-        className="hover:text-background hover:bg-brand w-fit hover:underline"
-      >
-        {value}
-      </a>
-    </div>
+      {value}
+    </a>
   );
 }
 export function Contact() {
