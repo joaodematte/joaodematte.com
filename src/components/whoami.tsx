@@ -1,6 +1,23 @@
-import { Section } from '@/components/section';
+'use client';
 
-export function Whoami() {
+import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
+
+import { Section } from '@/components/section';
+import { NowPlayingResponse } from '@/lib/spotify';
+
+interface WhoamiProps {
+  initialPlaying: NowPlayingResponse;
+}
+
+export function Whoami({ initialPlaying }: WhoamiProps) {
+  const { data } = useQuery({
+    queryKey: ['spotify'],
+    queryFn: () => fetch('/api/now-playing').then((res) => res.json())
+  });
+
+  const spotifyData = data ?? initialPlaying;
+
   return (
     <Section
       content={
@@ -17,18 +34,27 @@ export function Whoami() {
             functional and aesthetically pleasing.
           </p>
 
-          {/* <div className="mt-4">
-            <span className="text-xs font-semibold">
-              Currently listening to
-            </span>
-            <div className="mt-2 flex items-end gap-2">
-              <div className="size-16 bg-neutral-300" />
-              <div className="text-sm">
-                <p className="font-semibold">DIE TRYING</p>
-                <p className="">PARTYNEXTDOOR</p>
+          {spotifyData.isPlaying && (
+            <div className="mt-4">
+              <span className="text-xs font-semibold">
+                Currently listening to
+              </span>
+              <div className="mt-2 flex items-end gap-2">
+                <div className="grid size-16 place-items-center">
+                  <Image
+                    src={spotifyData.albumImageUrl}
+                    alt={spotifyData.title}
+                    width={64}
+                    height={64}
+                  />
+                </div>
+                <div className="text-sm">
+                  <p className="font-semibold">{spotifyData.title}</p>
+                  <p className="">{spotifyData.artist}</p>
+                </div>
               </div>
             </div>
-          </div> */}
+          )}
         </div>
       }
     />

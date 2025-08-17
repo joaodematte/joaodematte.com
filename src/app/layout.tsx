@@ -3,6 +3,7 @@ import { Geist_Mono, Inter } from 'next/font/google';
 
 import '@/styles/globals.css';
 
+import { Providers } from '@/app/providers';
 import { Noise } from '@/components/noise';
 import { cn } from '@/lib/utils';
 
@@ -30,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(fontSans.variable, fontMono.variable)}>
-        {children}
+        <Providers>{children}</Providers>
         <Noise />
       </body>
     </html>
